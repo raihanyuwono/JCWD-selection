@@ -18,17 +18,23 @@ const mainContaier = {
     p: "16px",
     gap: "8px",
     borderRadius: "8px",
+    color: "textPrimaryLight",
 };
 
 const title = {
     fontSize: "28px",
     fontWeight: "semibold",
     fontFamily: "Fira Sans",
-    mb: "16px"
-}
+    mb: "16px",
+};
 
 const indentifier = setAttributes("identifier", "text", "Username", <FiUser />);
-const password = setAttributes("password", "password", "Password", <FiUnlock />);
+const password = setAttributes(
+    "password",
+    "password",
+    "Password",
+    <FiUnlock />
+);
 
 function LoginForm() {
     return (
@@ -37,7 +43,7 @@ function LoginForm() {
             <Spacer />
             <CustomInput {...indentifier} />
             <CustomInput {...password} />
-            <Spacer/>
+            <Spacer />
             <LoginButton />
         </Flex>
     );
