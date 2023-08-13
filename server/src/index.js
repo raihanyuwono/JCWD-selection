@@ -1,12 +1,20 @@
 const path = require("path");
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config({
     path: path.resolve(__dirname, "../.env"),
 });
 const { rAuth, rUser } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
+const WHITELIST = process.env.WHITELIST;
 const app = express();
+
+app.use(
+    cors({
+        origin: [WHITELIST && WHITELIST.split(",")],
+    })
+);
 
 // require("./models").sequelize.sync({ alter: true });
 app.use(express.json());

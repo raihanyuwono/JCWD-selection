@@ -22,7 +22,7 @@ function setSchema(id, type) {
             break;
         case "tel":
             schema[id] = Yup.string()
-                .matches(/^08\d{8, 11}/, "Invalid format")
+                .matches(/^08(\d{8,11})$/, "Invalid format")
                 .required("required");
             break;
         case "password":

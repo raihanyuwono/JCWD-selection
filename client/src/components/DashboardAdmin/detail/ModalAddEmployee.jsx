@@ -5,9 +5,12 @@ import {
     ModalContent,
     ModalOverlay,
     Text,
+    useToast,
 } from "@chakra-ui/react";
 import CustomInput from "../../Custom/CustomInput";
 import { FiMail } from "react-icons/fi";
+import { newUser } from "../../../api/auth";
+import { useState } from "react";
 
 const overlay = {
     backdropFilter: "blur(2px)",
@@ -48,6 +51,16 @@ const inputEmail = {
 };
 
 function ModalAddEmployee({ isOpen, onClose }) {
+    const [isLoading, setIsLoading] = useState(false);
+    const toast = useToast();
+
+    async function handleAddUser() {
+        const email = document.getElementById("email").value;
+        setIsLoading(true);
+        await newUser(toast, email);
+        setIsLoading(false);
+    }
+
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay {...overlay} />
@@ -55,7 +68,7 @@ function ModalAddEmployee({ isOpen, onClose }) {
                 <Flex {...container}>
                     <Text {...title}>Add New Employee</Text>
                     <CustomInput {...inputEmail} />
-                    <Button {...sumbitButton}>SUBMIT</Button>
+                    <Button {...sumbitButton} isLoading={isLoading} onClick={handleAddUser}>SUBMIT</Button>
                 </Flex>
             </ModalContent>
         </Modal>

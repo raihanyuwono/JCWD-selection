@@ -9,6 +9,7 @@ require("dotenv").config({
 
 const KEY_JWT = process.env.KEY_JWT;
 const users = db["user"];
+const salaries = db["salary"];
 
 async function passHass(password) {
     const salt = await bcrypt.genSalt(10);
@@ -24,10 +25,10 @@ async function editUser(token, attributes) {
     if (isExist) return messages.error(500, "User has been registered");
 
     const { name, username, phone, password, birthday } = attributes;
-    const pass = await hashPass(password);
+    const pass = await passHass(password);
 
     return await db.sequelize.transaction(async function (t) {
-        await users.create(
+        const user = await users.create(
             {
                 name,
                 username,
@@ -36,6 +37,10 @@ async function editUser(token, attributes) {
                 password: pass,
                 birthday,
             },
+            { transaction: t }
+        );
+        await salaries.create(
+            { id_user: user["id"], amount: 70000 },
             { transaction: t }
         );
         return messages.success("Your data successfully added");

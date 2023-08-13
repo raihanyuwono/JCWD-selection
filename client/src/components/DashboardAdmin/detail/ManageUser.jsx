@@ -7,12 +7,14 @@ const mainContainer = {
     fontFamily: "Fira Code",
     minH: "calc(100vh - 56px)",
     p: "12px",
+    w: "full",
 };
 
 const container = {
     alignItems: "center",
     direction: "column",
     gap: "8px",
+    w: "full",
 };
 
 const title = {

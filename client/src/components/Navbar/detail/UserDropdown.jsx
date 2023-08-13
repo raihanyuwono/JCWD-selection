@@ -36,7 +36,7 @@ function UserDropdown({ user }) {
     return (
         <Menu>
             <MenuButton {...menuButton}>
-                <Text>{"USERNAME"}</Text>
+                <Text>{user["username"]}</Text>
             </MenuButton>
             <MenuList {...menuList}>
                 <MenuItem {...menuItem} onClick={handleLogout}>

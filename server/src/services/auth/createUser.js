@@ -12,9 +12,9 @@ const FE_URL = process.env.FE_URL;
 const KEY_JWT = process.env.KEY_JWT;
 
 async function createUser(email) {
-    const isExist = users.findOne({ where: { email } });
+    const isExist = await users.findOne({ where: { email } });
     if (isExist) return messages.error(500, "Email has been registered");
-
+    
     const payload = { email };
     const token = jwt.sign(payload, KEY_JWT, {
         expiresIn: "24h",

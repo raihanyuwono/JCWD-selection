@@ -19,6 +19,7 @@ const mainContaier = {
     gap: "8px",
     borderRadius: "8px",
     color: "textPrimaryLight",
+    fontFamily: "Fira Code",
 };
 
 const title = {
@@ -28,7 +29,7 @@ const title = {
     mb: "16px",
 };
 
-const indentifier = setAttributes("identifier", "text", "Username", <FiUser />);
+const identifier = setAttributes("identifier", "text", "Username", <FiUser />);
 const password = setAttributes(
     "password",
     "password",
@@ -41,7 +42,7 @@ function LoginForm() {
         <Flex {...mainContaier}>
             <Text {...title}>Login</Text>
             <Spacer />
-            <CustomInput {...indentifier} />
+            <CustomInput {...identifier} />
             <CustomInput {...password} />
             <Spacer />
             <LoginButton />

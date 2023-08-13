@@ -23,20 +23,21 @@ function pickDashboard(role) {
 }
 
 function Dashboard() {
-    const [role, setRole] = useState("admin");
+    const [role, setRole] = useState(null);
 
     function checkTokenLogin() {
         const token = localStorage.getItem("token");
-        // if (!token) return document.location.href = "/login";
+        if (!token) return (document.location.href = "/login");
 
-        // const decoded = jwt_decode(token);
-        // setRole(decoded["role"]["name"]);
+        const decoded = jwt_decode(token);
+        setRole(decoded["role"]);
     }
 
     useEffect(() => {
         checkTokenLogin();
     }, []);
-
+    
+    if (!role) return;
     return (
         <Flex {...container}>
             <Navbar />

@@ -25,8 +25,8 @@ async function editUser(req, res) {
     try {
         let token = req.headers.authorization;
         if (!token || token == "null")
-            return res.status(400).json({ message: "Not Authorized" });
-
+        return res.status(400).json({ message: "Not Authorized" });
+        
         token = token.split(" ")[1];
         const attributes = req.body;
         const result = await sAuth.editUser(token, attributes);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import ToastNotification from "../components/ToastNotification";
 
 const BASE_URL = process.env.REACT_APP_API_BASE_URL;
 const AUTH_URL = `${BASE_URL}/auth`;
@@ -9,19 +10,26 @@ const HEADERS = {
     },
 };
 
-async function login(identifier, password) {
+async function login(toast, identifier, password) {
     try {
         const response = await axios.post(`${AUTH_URL}/login`, {
             identifier,
             password,
         });
+        ToastNotification(toast, {
+            title: response.data.message,
+            status: response.status,
+        });
         return response.data;
     } catch (error) {
-        console.error(error.response.data.message);
+        ToastNotification(toast, {
+            title: error.response.data.message,
+            status: error.response.status,
+        });
     }
 }
 
-async function newUser(email) {
+async function newUser(toast, email) {
     try {
         const response = await axios.post(
             `${AUTH_URL}/user`,
@@ -30,23 +38,37 @@ async function newUser(email) {
             },
             HEADERS
         );
+        ToastNotification(toast, {
+            title: response.data.message,
+            status: response.status,
+        });
         return response.data;
     } catch (error) {
-        console.error(error.response.data.message);
+        ToastNotification(toast, {
+            title: error.response.data.message,
+            status: error.response.status,
+        });
     }
 }
 
-async function fillData(token, attributes) {
+async function register(toast, token, attributes) {
     try {
         const response = await axios.patch(`${AUTH_URL}/user`, attributes, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
+        ToastNotification(toast, {
+            title: response.data.message,
+            status: response.status,
+        });
         return response.data;
     } catch (error) {
-        console.error(error.response.data.message);
+        ToastNotification(toast, {
+            title: error.response.data.message,
+            status: error.response.status,
+        });
     }
 }
 
-export { login, newUser, fillData };
+export { login, newUser, register };
