@@ -6,12 +6,24 @@ import jwt_decode from "jwt-decode";
 import { Flex } from "@chakra-ui/react";
 
 const container = {
-    w: "full",
-    minH: "full",
+    w: "100vw",
+    h: "full",
+    direction: "column",
 };
 
+function pickDashboard(role) {
+    switch (role) {
+        case "admin":
+            return <DashboardAdmin />;
+        case "employee":
+            return <DashboardEmployee />;
+        default:
+            return;
+    }
+}
+
 function Dashboard() {
-    const [role, setRole] = useState("");
+    const [role, setRole] = useState("admin");
 
     function checkTokenLogin() {
         const token = localStorage.getItem("token");
@@ -28,7 +40,7 @@ function Dashboard() {
     return (
         <Flex {...container}>
             <Navbar />
-            {/* {role === "admin" ? <DashboardAdmin /> : <DashboardEmployee />} */}
+            {pickDashboard(role)}
         </Flex>
     );
 }

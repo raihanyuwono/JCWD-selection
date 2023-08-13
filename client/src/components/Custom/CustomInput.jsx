@@ -38,8 +38,7 @@ function setSchema(id, type) {
                 schema[id] = Yup.string()
                     .min(6, "must be at least 6 characters")
                     .required("required");
-            if (id === "identifier")
-                schema[id] = Yup.string().required("required");
+            else schema[id] = Yup.string().required("required");
     }
     return schema;
 }
@@ -98,6 +97,12 @@ function CustomInput({ id, type, placeholder, icon }) {
         border: "none",
         pl: "3rem",
     };
+
+    if (type === "date") {
+        input["type"] = "text";
+        input["onFocus"] = () => (document.getElementById(id).type = "date");
+        input["onBlur"] = () => (document.getElementById(id).type = "text");
+    }
 
     return (
         <FormControl isInvalid={formik.errors[id]}>

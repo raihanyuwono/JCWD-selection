@@ -19,7 +19,7 @@ async function createUser(email) {
     const token = jwt.sign(payload, KEY_JWT, {
         expiresIn: "24h",
     });
-    const redirect = `${FE_URL}/signup/${token}`;
+    const redirect = `${FE_URL}/register/${token}`;
 
     await sendMail(email, "Complete your data", { redirect });
     return messages.success("Success send email to the employee");

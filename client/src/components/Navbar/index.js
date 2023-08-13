@@ -3,7 +3,7 @@ import NavLeft from "./detail/NavLeft";
 import NavRight from "./detail/NavRight";
 
 const container = {
-    w: "full",
+    w: "100vw",
     h: "56px",
     px: "16px",
     bgColor: "secondary",
