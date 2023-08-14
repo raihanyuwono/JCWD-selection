@@ -75,16 +75,8 @@ function ReportChart() {
     const chart = useRef(null);
 
     async function fetchTotalPayrolls() {
-        console.log("MASUK SINI BRO");
-        // if (startDate <= endDate) {
-        //     const queries = {
-        //         start_date: startDate,
-        //         end_date: endDate,
-        //     };
-        // const { data } = await getTotalTransactions(queries);
         const { data } = await getAllTotal();
         setTotalPayrolls(data);
-        // }
     }
 
     async function createChart() {

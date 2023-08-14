@@ -13,7 +13,7 @@ const styleOption = {
     },
 };
 
-function ReportFilterSelection({ items = [], handleChange }) {
+function ReportFilterSelection({ items = [], value, handleChange }) {
     const dispatch = useDispatch();
 
     function onHandleChange(event) {
@@ -22,7 +22,7 @@ function ReportFilterSelection({ items = [], handleChange }) {
     }
 
     return (
-        <Select {...styleSelection} onChange={(e) => onHandleChange(e)}>
+        <Select {...styleSelection} value={value} onChange={(e) => onHandleChange(e)}>
             {items.map((item, index) => (
                 <option {...styleOption} value={item} key={index}>
                     {item}

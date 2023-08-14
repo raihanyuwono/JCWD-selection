@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const currentDate = new Date();
+function setFilterDate(year, month) {
+    function setMonth() {
+        return `-${month < 10 ? "0" + month : month}`;
+    }
+    return `${year}${month ? setMonth() : ""}`;
+}
 
 const initialState = {
-    filterMode: "month",
-    filterMonth: currentDate.getMonth() + 1,
-    filterYear: currentDate.getFullYear(),
+    filterMode: "year",
+    filterDate: setFilterDate(new Date().getFullYear()),
     filterOrder: "DESC",
 };
 
@@ -15,14 +19,24 @@ export const ReportReducer = createSlice({
     reducers: {
         setFilterMode: (state, action) => {
             state.filterMode = action.payload;
+            const curDate = new Date();
+            if (action.payload === "month")
+                state.filterDate = setFilterDate(
+                    curDate.getFullYear(),
+                    curDate.getMonth() + 1
+                );
+            else state.filterDate = setFilterDate(curDate.getFullYear());
         },
         setFilterMonth: (state, action) => {
             const date = new Date(action.payload);
-            state.filterMonth = date.getMonth() + 1;
-            state.filterYear = date.getFullYear();
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            state.filterDate = setFilterDate(year, month);
         },
         setFilterYear: (state, action) => {
-            state.filterYear = action.payload;
+            const date = new Date(action.payload);
+            const year = date.getFullYear();
+            state.filterDate = setFilterDate(year);
         },
         setFilterOrder: (state, action) => {
             state.filterOrder = action.payload;

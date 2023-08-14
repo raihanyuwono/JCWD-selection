@@ -1,6 +1,10 @@
 import { Flex, Input } from "@chakra-ui/react";
 import ReportFilterSelection from "./ReportFilterSelection";
-import { setFilterMode, setFilterMonth, setFilterYear } from "../../../storage/ReportReducer";
+import {
+    setFilterMode,
+    setFilterMonth,
+    setFilterYear,
+} from "../../../storage/ReportReducer";
 import { useDispatch, useSelector } from "react-redux";
 import ReportFilterOrder from "./ReportFilterOrder";
 
@@ -25,18 +29,20 @@ const selectionYear = setRange(2020, currentDate.getFullYear());
 
 function ReportFilter() {
     const mode = useSelector((state) => state.report.filterMode);
+    const value = useSelector((state) => state.report.filterDate);
     const dispatch = useDispatch();
 
     function handleChange(event) {
         dispatch(setFilterMonth(event.target.value));
     }
 
-    function getFilter(mode) {
+    function getFilter(mode, value) {
         switch (mode) {
             case "month":
                 return (
                     <Input
                         type="month"
+                        value={value}
                         onChange={(event) => handleChange(event)}
                     />
                 );
@@ -44,6 +50,7 @@ function ReportFilter() {
                 return (
                     <ReportFilterSelection
                         items={selectionYear}
+                        value={value}
                         handleChange={setFilterYear}
                     />
                 );
@@ -56,9 +63,10 @@ function ReportFilter() {
         <Flex {...containerOptions}>
             <ReportFilterSelection
                 items={selectionMode}
+                value={mode}
                 handleChange={setFilterMode}
             />
-            {getFilter(mode)}
+            {getFilter(mode, value)}
             <ReportFilterOrder />
         </Flex>
     );
