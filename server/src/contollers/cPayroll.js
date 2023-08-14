@@ -16,6 +16,7 @@ async function getLogs(req, res) {
         const queries = req.query;
         const { id } = req.params;
         const result = await sPayroll.getLogs(id, queries);
+        res.status(result.status).json(messages.response(result));
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -26,6 +27,7 @@ async function getAllTotal(req, res) {
         const queries = req.query;
         const { id } = req.params;
         const result = await sPayroll.getAllTotal(id, queries);
+        res.status(result.status).json(messages.response(result));
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -36,6 +38,7 @@ async function getTotal(req, res) {
         const queries = req.query;
         const { id } = req.params;
         const result = await sPayroll.getTotal(id, queries);
+        res.status(result.status).json(messages.response(result));
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

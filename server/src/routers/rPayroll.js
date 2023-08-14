@@ -10,6 +10,6 @@ router.get("/log/:id", mAuth, isAdmin, cPayroll.getLogs);
 // Get Payroll logs (monthly/yearly) - total list
 router.get("/total", mAuth, isAdmin, cPayroll.getAllTotal);
 // Get Payroll logs (monthly/yearly) - total list per user
-router.get("/total", mAuth, isAdmin, cPayroll.getTotal);
+router.get("/total/:id", mAuth, isAdmin, cPayroll.getTotal);
 
 module.exports = router;

@@ -19,4 +19,14 @@ async function getAllLogs() {
     }
 }
 
-export { getAllLogs };
+async function getAllTotal() {
+    try {
+        const response = await axios.get(`${PAYROLL_URL}/total`, HEADERS);
+        console.log("API GET ALL TOTAL >> ", response.data);
+        return response.data;
+    } catch (error) {
+        console.error(error.response.data.message);
+    }
+}
+
+export { getAllLogs, getAllTotal };

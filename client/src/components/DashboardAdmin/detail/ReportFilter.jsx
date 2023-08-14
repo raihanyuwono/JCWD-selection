@@ -2,6 +2,7 @@ import { Flex, Input } from "@chakra-ui/react";
 import ReportFilterSelection from "./ReportFilterSelection";
 import { setFilterMode, setFilterMonth, setFilterYear } from "../../../storage/ReportReducer";
 import { useDispatch, useSelector } from "react-redux";
+import ReportFilterOrder from "./ReportFilterOrder";
 
 const containerOptions = {
     w: "full",
@@ -58,6 +59,7 @@ function ReportFilter() {
                 handleChange={setFilterMode}
             />
             {getFilter(mode)}
+            <ReportFilterOrder />
         </Flex>
     );
 }

@@ -1,6 +1,7 @@
 import Chart from "chart.js/auto";
 import { useEffect, useRef, useState } from "react";
 import { Box } from "@chakra-ui/react";
+import { getAllTotal } from "../../../api/payroll";
 
 const chartOptions = {
     w: "full",
@@ -58,35 +59,36 @@ function createLabels(startDate, endDate) {
     return labels;
 }
 
-function createData(transactions, labels) {
+function createData(totalPayrolls, labels) {
     const data = [];
     for (let label of labels) {
         const date = label.split("/").reverse().join("-");
-        const index = transactions.findIndex((item) => item["date"] === date);
-        data.push(index === -1 ? 0 : transactions[index]["total"]);
+        const index = totalPayrolls.findIndex((item) => item["date"] === date);
+        data.push(index === -1 ? 0 : totalPayrolls["total_payroll"]);
     }
     return data;
 }
 
-function ReportChart({ startDate, endDate }) {
+function ReportChart() {
     const [totalPayrolls, setTotalPayrolls] = useState([]);
     const chartRef = useRef(null);
     const chart = useRef(null);
 
-    async function fetchTotalTransactions() {
-        if (startDate <= endDate) {
-            const queries = {
-                start_date: startDate,
-                end_date: endDate,
-            };
-            // const { data } = await getTotalTransactions(queries);
-            const data = [];
-            setTotalPayrolls(data);
-        }
+    async function fetchTotalPayrolls() {
+        console.log("MASUK SINI BRO");
+        // if (startDate <= endDate) {
+        //     const queries = {
+        //         start_date: startDate,
+        //         end_date: endDate,
+        //     };
+        // const { data } = await getTotalTransactions(queries);
+        const { data } = await getAllTotal();
+        setTotalPayrolls(data);
+        // }
     }
 
     async function createChart() {
-        const labels = createLabels(startDate, endDate);
+        const labels = createLabels("2023-08-01", "2023-08-14");
         const data = createData(totalPayrolls, labels);
         const config = setConfig(labels, data);
 
@@ -99,8 +101,8 @@ function ReportChart({ startDate, endDate }) {
     }
 
     useEffect(() => {
-        fetchTotalTransactions();
-    }, [startDate, endDate]);
+        fetchTotalPayrolls();
+    }, []);
 
     useEffect(() => {
         createChart();

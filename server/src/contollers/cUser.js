@@ -21,10 +21,10 @@ async function getUsers(req, res) {
     }
 }
 
-async function changeSalary(req, res) {
+async function editUser(req, res) {
     try {
-        const { id, amount } = req.body;
-        const result = await sUser.changeSalary(id, amount);
+        const attr = req.body;
+        const result = await sUser.editUser(attr);
         res.status(result.status).json(messages.response(result));
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -34,5 +34,5 @@ async function changeSalary(req, res) {
 module.exports = {
     getUser,
     getUsers,
-    changeSalary,
+    editUser,
 };

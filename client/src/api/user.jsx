@@ -28,10 +28,10 @@ async function getUser(id) {
     }
 }
 
-async function changeSalary(toast, id, amount) {
+async function editUser(toast, attributes) {
     try {
-        const params = { id, amount };
-        const response = await axios.patch(USER_URL, params, HEADERS);
+        // attribute must have id_user
+        const response = await axios.patch(USER_URL, attributes, HEADERS);
         ToastNotification(toast, {
             title: response.data.message,
             status: response.status,
@@ -45,4 +45,4 @@ async function changeSalary(toast, id, amount) {
     }
 }
 
-export { getUsers, getUser, changeSalary };
+export { getUsers, getUser, editUser };

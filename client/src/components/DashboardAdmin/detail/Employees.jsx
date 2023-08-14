@@ -2,20 +2,7 @@ import { useEffect, useState } from "react";
 import { getUsers } from "../../../api/user";
 import EmployeeCard from "./EmployeeCard";
 import { Grid } from "@chakra-ui/react";
-
-const dummy = [
-    { username: "Kashtira Shang-Ira" },
-    { username: "Kashtira Shang-Ira" },
-    { username: "Kashtira Shang-Ira" },
-    { username: "Kashtira Shang-Ira" },
-    { username: "Kashtira Shang-Ira" },
-    { username: "Kashtira Shang-Ira" },
-    { username: "Kashtira Shang-Ira" },
-    { username: "Kashtira Shang-Ira" },
-    { username: "Kashtira Shang-Ira" },
-    { username: "Kashtira Shang-Ira" },
-    { username: "Kashtira Shang-Ira" },
-];
+import { useSelector } from "react-redux"
 
 const container = {
     w: "full",
@@ -28,6 +15,7 @@ const container = {
 
 function Employees() {
     const [employees, setEmployees] = useState([]);
+    const triggerUpdate = useSelector((state) => state.info.infoTrigger);
 
     async function fetchEmployees() {
         const { data } = await getUsers();
@@ -36,7 +24,7 @@ function Employees() {
 
     useEffect(() => {
         fetchEmployees();
-    }, []);
+    }, [triggerUpdate]);
 
     return (
         <Grid {...container}>

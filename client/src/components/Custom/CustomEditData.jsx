@@ -11,18 +11,29 @@ const logoStyle = {
     fontSize: "24px",
 };
 
-function render(isEdit, value) {
+function render(isEdit, id_user, id, type, value, placeholder) {
     if (!isEdit) return <Text>{value}</Text>;
-    return <CustomEditForm />
+    return (
+        <CustomEditForm
+            id_user={id_user}
+            id={id}
+            type={type}
+            placeholder={placeholder}
+        />
+    );
 }
 
-function CustomEditData({ value, logo }) {
+function CustomEditData({ id_user, id, type, value, placeholder, logo }) {
     const [isEdit, setIsEdit] = useState(false);
 
     return (
         <>
-            <GridItem {...logoStyle} justifySelf={"right"}>{logo}</GridItem>
-            <GridItem>{render(isEdit, value)}</GridItem>
+            <GridItem {...logoStyle} justifySelf={"right"}>
+                {logo}
+            </GridItem>
+            <GridItem>
+                {render(isEdit, id_user, id, type, value, placeholder)}
+            </GridItem>
             <GridItem justifySelf={"left"} onClick={() => setIsEdit(!isEdit)}>
                 <FiEdit {...logoStyle} {...edit} />
             </GridItem>

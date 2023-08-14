@@ -40,22 +40,13 @@ const title = {
     fontWeight: "semibold",
 };
 
-const sumbitButton = {
-    w: "full",
-    bgColor: "successPrimary",
-    color: "textPrimaryDark",
-    borderRadius: "3rem",
-    _hover: {
-        bgColor: "successSecondary",
-    },
-};
 
-function setData(id, value, logo) {
-    return { id, value, logo };
+function setData(id_user, id, type, value, placeholder, logo) {
+    return {id_user, id, type, value, placeholder, logo };
 }
 
 function ModalDetailEmployee({ user, isOpen, onClose }) {
-    const { username, name, email, phone, birthday, salary, created_at } = user;
+    const { id, username, name, email, phone, birthday, salary } = user;
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -65,28 +56,62 @@ function ModalDetailEmployee({ user, isOpen, onClose }) {
                     <Text {...title}>Info</Text>
                     <Grid {...infoContainer}>
                         <CustomEditData
-                            {...setData("name", name, <FiUser />)}
-                        />
-                        <CustomEditData
-                            {...setData("username", username, <FiUser />)}
-                        />
-                        <CustomEditData
-                            {...setData("email", email, <FiMail />)}
-                        />
-                        <CustomEditData
-                            {...setData("phone", phone, <FiPhone />)}
+                            {...setData(
+                                id,
+                                "name",
+                                "text",
+                                name,
+                                "Name",
+                                <FiUser />
+                            )}
                         />
                         <CustomEditData
                             {...setData(
+                                id,
+                                "username",
+                                "text",
+                                username,
+                                "Username",
+                                <FiUser />
+                            )}
+                        />
+                        <CustomEditData
+                            {...setData(
+                                id,
+                                "email",
+                                "email",
+                                email,
+                                "Email",
+                                <FiMail />
+                            )}
+                        />
+                        <CustomEditData
+                            {...setData(
+                                id,
+                                "phone",
+                                "tel",
+                                phone,
+                                "Phone",
+                                <FiPhone />
+                            )}
+                        />
+                        <CustomEditData
+                            {...setData(
+                                id,
                                 "birthday",
+                                "date",
                                 dateFormater(birthday),
+                                "Birthday",
                                 <FiCalendar />
                             )}
                         />
                         <CustomEditData
                             {...setData(
-                                "salary",
+                                id,
+                                "amount",
+                                "number",
                                 priceFormater(salary["amount"]),
+                                "Salary",
                                 <LiaMoneyBillWaveSolid />
                             )}
                         />

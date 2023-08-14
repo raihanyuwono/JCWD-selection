@@ -1,9 +1,9 @@
 const getUser = require("./getUser");
 const getUsers = require("./getUsers");
-const changeSalary = require("./changeSalary");
+const editUser = require("./editUser");
 
 module.exports = {
     getUser,
     getUsers,
-    changeSalary,
+    editUser,
 }
