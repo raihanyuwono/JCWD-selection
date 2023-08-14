@@ -4,7 +4,7 @@ const cors = require("cors");
 require("dotenv").config({
     path: path.resolve(__dirname, "../.env"),
 });
-const { rAuth, rUser } = require("./routers");
+const { rAuth, rUser, rAttendance, rPayroll } = require("./routers");
 
 const PORT = process.env.PORT || 8000;
 const WHITELIST = process.env.WHITELIST;
@@ -21,6 +21,8 @@ app.use(express.json());
 
 app.use("/api/auth", rAuth);
 app.use("/api/users", rUser);
+app.use("/api/attendances", rAttendance);
+app.use("/api/payrolls", rPayroll);
 
 // Not found
 app.use((err, req, res, next) => {
