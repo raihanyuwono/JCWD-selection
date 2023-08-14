@@ -1,23 +1,32 @@
-import { Tbody } from "@chakra-ui/react"
-import ReportLogItem from "./ReportLogItem"
+import { Tbody, filter } from "@chakra-ui/react";
+import ReportLogItem from "./ReportLogItem";
 import { useEffect, useState } from "react";
 import { getAllLogs } from "../../../api/payroll";
+import { useSelector } from "react-redux";
 
 const tBody = {
     oveflow: "scroll",
 };
 
-function ReportLogItems(){
+function ReportLogItems() {
     const [logs, setLogs] = useState([]);
+    const filterMode = useSelector((state) => state.report.filterMode);
+    const filterDate = useSelector((state) => state.report.filterDate);
+    const filterOrder = useSelector((state) => state.report.filterOrder);
 
     async function fetchAllLogs() {
-        const { data } = await getAllLogs();
+        const queries = {
+            filter_by: filterMode,
+            date: filterDate,
+            order: filterOrder,
+        };
+        const { data } = await getAllLogs(queries);
         setLogs(data);
     }
 
     useEffect(() => {
         fetchAllLogs();
-    }, [])
+    }, [filterMode, filterDate]);
 
     return (
         <Tbody {...tBody}>
@@ -25,7 +34,7 @@ function ReportLogItems(){
                 <ReportLogItem log={log} key={index} />
             ))}
         </Tbody>
-    )
+    );
 }
 
-export default ReportLogItems
+export default ReportLogItems;

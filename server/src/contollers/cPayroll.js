@@ -25,8 +25,7 @@ async function getLogs(req, res) {
 async function getAllTotal(req, res) {
     try {
         const queries = req.query;
-        const { id } = req.params;
-        const result = await sPayroll.getAllTotal(id, queries);
+        const result = await sPayroll.getAllTotal(queries);
         res.status(result.status).json(messages.response(result));
     } catch (error) {
         res.status(500).json({ message: error.message });

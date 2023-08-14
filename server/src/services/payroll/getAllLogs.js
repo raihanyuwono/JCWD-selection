@@ -6,10 +6,16 @@ const attendances = db["attendance"];
 const payrolls = db["payroll"];
 const users = db["user"];
 
-function setAttributes() {
+function setAttributes(filter) {
     return {
         include: [
-            [fn("YEAR", col("attendance.created_at")), "date"],
+            [
+                fn(
+                    filter === "year" ? "YEAR" : "MONTH",
+                    col("attendance.created_at")
+                ),
+                "date",
+            ],
             [fn("SUM", col("payroll.salary")), "total_salary"],
         ],
         exclude: [
@@ -32,12 +38,16 @@ const order = [["created_at", "DESC"]];
 const group = [["date", "id_user"]];
 
 async function getAllLogs(queries) {
-    // const
+    console.log("LOGS QUERIES", queries);
+    const { filter_by, date } = queries;
     const result = await attendances.findAll({
-        attributes: setAttributes(),
+        attributes: setAttributes(filter_by),
         include,
         order,
         group,
+        where: {
+
+        }
     });
     return messages.success("", result);
 }

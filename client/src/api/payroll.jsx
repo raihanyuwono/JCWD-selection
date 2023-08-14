@@ -9,9 +9,25 @@ const HEADERS = {
     },
 };
 
-async function getAllLogs() {
+function createQuery(queries = {}) {
+    // title, id_category, order_by, order, page=1, limit=10
+    // if (!queries["page"]) queries["page"] = 1;
+    // if (!queries["limit"]) queries["limit"] = 10;
+    let query = "";
+    for (const key in queries) {
+        query += `${key}=${queries[key]}&`;
+    }
+    return query.replace(/&$/, "");
+}
+
+async function getAllLogs(queries) {
     try {
-        const response = await axios.get(`${PAYROLL_URL}/log`, HEADERS);
+        const query = createQuery(queries);
+        console.log(`${PAYROLL_URL}/log?${query}`);
+        const response = await axios.get(
+            `${PAYROLL_URL}/log?${query}`,
+            HEADERS
+        );
         console.log("API GET ALL LOGS >> ", response.data);
         return response.data;
     } catch (error) {
@@ -19,9 +35,13 @@ async function getAllLogs() {
     }
 }
 
-async function getAllTotal() {
+async function getAllTotal(queries) {
     try {
-        const response = await axios.get(`${PAYROLL_URL}/total`, HEADERS);
+        const query = createQuery(queries);
+        const response = await axios.get(
+            `${PAYROLL_URL}/total?${query}`,
+            HEADERS
+        );
         console.log("API GET ALL TOTAL >> ", response.data);
         return response.data;
     } catch (error) {

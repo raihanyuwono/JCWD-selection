@@ -28,14 +28,14 @@ const include = [{ model: payrolls, attributes: [] }];
 const order = [["date", "ASC"]];
 const group = [["date"]];
 
-async function getAllTotal() {
+async function getAllTotal(queries) {
+    console.log("QUERIES", queries)
     const result = await attendances.findAll({
         attributes: setAttributes(),
         include,
         order,
         group,
     });
-    console.log("SAMPAI SINI ????");
     return messages.success("", result);
 }
 
