@@ -11,7 +11,7 @@ const th = {
     textAlign: "center",
 };
 
-function Attendances({ attendances = [] }) {
+function Attendances() {
     return (
         <TableContainer {...mainContainer}>
             <Table>

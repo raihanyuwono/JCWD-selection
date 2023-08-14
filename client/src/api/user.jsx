@@ -13,7 +13,6 @@ const HEADERS = {
 async function getUsers() {
     try {
         const response = await axios.get(USER_URL, HEADERS);
-        console.log(response.data.data);
         return response.data;
     } catch (error) {
         console.error(error.response.data.message);

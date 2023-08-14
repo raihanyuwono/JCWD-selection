@@ -1,3 +1,5 @@
+const DATE_LOCALE = "en-UK";
+
 function priceFormater(price) {
     let formatted = "";
     price = String(price);
@@ -10,9 +12,8 @@ function priceFormater(price) {
     return formatted;
 }
 
-function dateFormater(date){
+function dateFormater(date) {
     date = new Date(date);
-    const DATE_LOCALE = "en-UK";
     return date.toLocaleDateString(DATE_LOCALE, {
         year: "numeric",
         month: "long",
@@ -20,4 +21,14 @@ function dateFormater(date){
     });
 }
 
-export { priceFormater, dateFormater };
+function timeFormater(date) {
+    if (!date) return;
+    date = new Date(date);
+    return date.toLocaleTimeString(DATE_LOCALE, {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+    });
+}
+
+export { priceFormater, dateFormater, timeFormater };

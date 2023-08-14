@@ -110,7 +110,7 @@ function CustomInput({ id, type, placeholder, icon }) {
                 <InputGroup
                     {...container}
                     borderColor={
-                        formik.errors[id] ? "warning" : "secondaryLight"
+                        formik.errors[id] ? "warningPrimary" : "secondaryLight"
                     }
                 >
                     <InputLeftElement bgColor="secondaryLight">
@@ -122,7 +122,7 @@ function CustomInput({ id, type, placeholder, icon }) {
                     />
                     {rightElement(id, type, showPass, setShowPass)}
                 </InputGroup>
-                <FormErrorMessage mt={"-4px"} color={"warning"}>
+                <FormErrorMessage mt={"-4px"} color={"warningPrimary"}>
                     {formik.errors[id]}
                 </FormErrorMessage>
             </VStack>
