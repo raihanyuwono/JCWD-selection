@@ -1,5 +1,5 @@
 import { Td, Tr } from "@chakra-ui/react";
-import { dateFormater, timeFormater } from "../../../helpers/Formater";
+import { dateFormater, priceFormater, timeFormater } from "../../../helpers/Formater";
 
 const td = {
     color: "textPrimaryDark",
@@ -13,6 +13,7 @@ function AttendanceItem({ log }) {
             <Td {...td}>{log["shift"]}</Td>
             <Td {...td}>{timeFormater(log["clock_in"])}</Td>
             <Td {...td}>{timeFormater(log["clock_out"])}</Td>
+            <Td {...td}>{priceFormater(log["payroll"]["salary"])}</Td>
         </Tr>
     );
 }

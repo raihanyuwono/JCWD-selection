@@ -21,6 +21,7 @@ function Attendances() {
                         <Th {...th}>Shift</Th>
                         <Th {...th}>Clock In</Th>
                         <Th {...th}>Clock Out</Th>
+                        <Th {...th}>Payroll</Th>
                     </Tr>
                 </Thead>
                 <AttendanceItems />
